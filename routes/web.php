@@ -14,3 +14,20 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->get('/key', function(){
+	return str_random(32);
+});
+
+$router->post('/login', ['uses' => 'UserController@getToken']);
+
+
+$router->group(['middleware' => ['auth']], function() use ($router) {
+	$router->get('/users', ['uses' => 'UserController@index']);   
+	$router->post('/user', ['uses' => 'UserController@createUser']);
+	$router->get('/user/{id}', ['uses' => 'UserController@findUser']);
+	$router->put('/user/{id}', ['uses' => 'UserController@updateUser']);
+	$router->delete('/user/{id}', ['uses' => 'UserController@deleteUser']);
+});
+
+
