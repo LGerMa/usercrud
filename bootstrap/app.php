@@ -63,6 +63,10 @@ $app->singleton(
 //    App\Http\Middleware\ExampleMiddleware::class
 // ]);
 
+$app->middleware([
+    'Vluzrmos\LumenCors\CorsMiddleware'
+]);
+
 $app->routeMiddleware([
      'auth' => App\Http\Middleware\Authenticate::class,
 ]);

@@ -113,10 +113,14 @@ class UserController extends Controller
 
     			$user = User::where('email', $data['email'])->first();
 
-    			if ($user && Hash::check($data['password'], $user->password))
-    				return response()->json($user, 200);
+    			if ($user){
+                    if (Hash::check($data['password'], $user->password))
+    				    return response()->json($user, 200);
+                    else
+                        return response()->json(['error' => 'Incorrect password'], 406);
+                }
     			else
-    				return response()->json(['error' => 'User or password are wrong'], 406);
+    				return response()->json(['error' => 'User does not exists'], 404);
     		}catch(ModelNotFoundException $e){
     			return response()->json(['error' => 'User or password are wrong'], 406);
     		}catch(ValidationException $e){

@@ -23,11 +23,10 @@ $router->post('/login', ['uses' => 'UserController@getToken']);
 
 
 $router->group(['middleware' => ['auth']], function() use ($router) {
-	$router->get('/users', ['uses' => 'UserController@index']);   
-	$router->post('/user', ['uses' => 'UserController@createUser']);
+	$router->get('/users', ['uses' => 'UserController@index']); 
 	$router->get('/user/{id}', ['uses' => 'UserController@findUser']);
 	$router->put('/user/{id}', ['uses' => 'UserController@updateUser']);
 	$router->delete('/user/{id}', ['uses' => 'UserController@deleteUser']);
 });
 
-
+$router->post('/user', ['uses' => 'UserController@createUser']);
