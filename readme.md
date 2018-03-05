@@ -28,3 +28,10 @@ composer update
 php artisan migrate
 
 ```
+
+## Run
+
+```
+php -S localhost:3000 -t public
+
+```
